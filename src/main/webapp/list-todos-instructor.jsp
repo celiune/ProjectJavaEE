@@ -33,10 +33,14 @@
             <c:url var="EditLink" value= "EditToDosServlet">
                 <c:param name="toDosId" value="${tempToDos.id}"/>
             </c:url>
+            <c:url var="DeleteLink" value= "DeleteToDosServlet" >
+                <c:param name="toDosId" value="${tempToDos.id}"/>
+            </c:url>
             <tr>
                 <td> ${tempToDos.id}</td>
                 <td> ${tempToDos.description}</td>
-                <td> <a href="${EditLink }"> Edit</a></td>
+                <td> <a href="${EditLink}"> Edit </a>
+                    <a href="${DeleteLink}"> Delete </a></td>
                 </c:forEach>
         </table>
     </div>

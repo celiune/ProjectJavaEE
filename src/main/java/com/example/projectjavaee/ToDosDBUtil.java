@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.out;
+
 
 public class ToDosDBUtil {
 
@@ -56,7 +58,7 @@ public class ToDosDBUtil {
             }
         }
         catch (Exception e){
-            System.out.println(e.getMessage());
+            out.println(e.getMessage());
         }
     }
 
@@ -76,7 +78,7 @@ public class ToDosDBUtil {
             }
             return toDos;
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            out.println(e.getMessage());
             return null;
         } finally{
             close(myConn,myStmt,myRs);
@@ -94,7 +96,7 @@ public class ToDosDBUtil {
             myStmt.execute();
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            out.println(e.getMessage());
         }
         finally{
             close(myConn,myStmt,null);
@@ -113,7 +115,25 @@ public class ToDosDBUtil {
             myStmt.execute();
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            out.println(e.getMessage());
+        }
+        finally{
+            close(myConn,myStmt,null);
+        }
+    }
+
+    public void deleteToDos(int id) {
+        Connection myConn=null;
+        Statement myStmt = null;
+        try {
+            myConn = dataSource.getConnection();
+            myStmt= myConn.createStatement();
+            String sql = "delete from todos where id=" + id;
+            myStmt.execute(sql);
+            out.println("Successfully deleted " + id );
+        }
+        catch(Exception e){
+            out.println(e.getMessage());
         }
         finally{
             close(myConn,myStmt,null);

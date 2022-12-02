@@ -10,8 +10,8 @@ import javax.servlet.annotation.*;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-@WebServlet(name = "AddToDosControllerServlet", value = "/AddToDosControllerServlet")
-public class AddToDosControllerServlet extends HttpServlet {
+@WebServlet(name = "DeleteToDosServlet", value = "/DeleteToDosServlet")
+public class DeleteToDosServlet extends HttpServlet {
     private ToDosDBUtil toDosDBUtil;
     @Resource(name="jdbc/projetjavaee")
     private DataSource dataSource;
@@ -31,13 +31,13 @@ public class AddToDosControllerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        int id=Integer.parseInt(request.getParameter("toDosId"));
+        toDosDBUtil.deleteToDos(id);
+        response.sendRedirect("ToDosControllerServlet");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String description = request.getParameter("description");
-        toDosDBUtil.addToDos(description);
-        response.sendRedirect("ToDosControllerServlet");
+
     }
 }
