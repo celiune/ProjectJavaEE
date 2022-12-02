@@ -1,5 +1,6 @@
 package com.example.projectjavaee;
 
+import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -8,22 +9,18 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-import static java.lang.System.out;
 
 @WebServlet(name = "AddToDosControllerServlet", value = "/AddToDosControllerServlet")
 public class AddToDosControllerServlet extends HttpServlet {
-
-    private ToDosDBUtil todosDBUtil;
-
+    private ToDosDBUtil toDosDBUtil;
+    @Resource(name="jdbc/projetjavaee")
     private DataSource dataSource;
+    int id;
 
-    public AddToDosControllerServlet(){
-        super();
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        toDosDBUtil = new ToDosDBUtil(dataSource);
     }
 
     private DataSource getDataSource() throws NamingException {
@@ -34,18 +31,6 @@ public class AddToDosControllerServlet extends HttpServlet {
     }
 
     @Override
-    public void init() throws ServletException {
-        super.init();
-        try{
-            dataSource = getDataSource();
-            todosDBUtil = new ToDosDBUtil(dataSource);
-        }
-        catch (NamingException e){
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -53,22 +38,8 @@ public class AddToDosControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String description = request.getParameter("description");
-        Connection myConn=null;
-        PreparedStatement myStmt = null;
-        ResultSet myRs= null;
-        try{
-            dataSource = getDataSource();
-            myConn = dataSource.getConnection();
-            String sql = "INSERT INTO todos (description) VALUES (?)";
-            myStmt = myConn.prepareStatement(sql);
-            myStmt.setString(1, description);
-            myStmt.execute();
-            out.println("New ToDo added");
-            response.sendRedirect("ToDosControllerServlet");
-        }
-        catch (Exception e){
-            out.println(e.getMessage());
-        }
+        toDosDBUtil.addToDos(description);
+        response.sendRedirect("ToDosControllerServlet");
 
     }
 }

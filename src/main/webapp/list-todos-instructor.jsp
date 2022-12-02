@@ -27,20 +27,22 @@
             <tr>
                 <th> Id </th>
                 <th> Description </th>
+                <th> Action </th>
             </tr>
             <c:forEach var="tempToDos" items="${ToDos_LIST }" >
             <c:url var="EditLink" value= "EditToDosServlet">
                 <c:param name="toDosId" value="${tempToDos.id}"/>
             </c:url>
             <tr>
+                <td> ${tempToDos.id}</td>
                 <td> ${tempToDos.description}</td>
                 <td> <a href="${EditLink }"> Edit</a></td>
                 </c:forEach>
         </table>
     </div>
 
-    <form name = "BtnForm" action = "add-todos.jsp" method="post">
-        <button>Add ToDos</button>
+    <form name = "BtnForm" action = "add-todos.jsp" method="post" >
+        <button class="add-student-button">Add a ToDo</button>
     </form>
 </div>
 </body>

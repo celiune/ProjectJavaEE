@@ -9,7 +9,6 @@ import java.io.IOException;
 
 @WebServlet(name = "EditToDosServlet", value = "/EditToDosServlet")
 public class EditToDosServlet extends HttpServlet {
-
     private ToDosDBUtil toDosDBUtil;
     @Resource(name="jdbc/projetjavaee")
     private DataSource dataSource;
@@ -22,11 +21,18 @@ public class EditToDosServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        id=Integer.parseInt(request.getParameter("toDosId"));
+        ToDos toDos= toDosDBUtil.fetchToDos(id);
+        request.setAttribute("ToDos", toDos);
+        request.getRequestDispatcher("edit-todos.jsp").forward(request, response);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String description= request.getParameter("description");
+        ToDos toDos = new ToDos(id,description);
+        toDosDBUtil.updateToDos(toDos);
+        response.sendRedirect("ToDosControllerServlet");
     }
 }
