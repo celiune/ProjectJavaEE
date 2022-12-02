@@ -48,6 +48,9 @@
     <form name = "BtnForm" action = "add-todos.jsp" method="post" >
         <button class="add-student-button">Add a ToDo</button>
     </form>
+    <form action="LogoutControllerServlet" method="get">
+        <input class="add-student-button" type="submit" value="Logout"/>
+    </form>
 </div>
 </body>
 </html>

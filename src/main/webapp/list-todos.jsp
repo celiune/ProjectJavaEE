@@ -35,6 +35,9 @@
                 </c:forEach>
         </table>
     </div>
+    <form action="LogoutControllerServlet" method="get">
+        <input class="add-student-button" type="submit" value="Logout"/>
+    </form>
 
 </div>
 </body>

@@ -7,4 +7,54 @@
     <welcome-file-list>
         <welcome-file>ToDosControllerServlet</welcome-file>
     </welcome-file-list>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>Common Space</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-constraint>
+        <display-name>AUTH TEST</display-name>
+        <web-resource-collection>
+            <web-resource-name>InstructorRestricted</web-resource-name>
+            <url-pattern>/EditToDosServlet</url-pattern>
+            <url-pattern>/AddToDosControllerServlet</url-pattern>
+            <url-pattern>/DeleteTodosServlet</url-pattern>
+            <url-pattern>/list-todos-instructor.jsp</url-pattern>
+            <url-pattern>/add-todos.jsp</url-pattern>
+            <url-pattern>/ToDosControllerServlet</url-pattern>
+            <url-pattern>/ToDosDBUtil</url-pattern>
+            <url-pattern>/list-todos-instructor.jsp</url-pattern>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>instructor</role-name>
+        </auth-constraint>
+
+    </security-constraint>
+    <security-role>
+        <description>instructor</description>
+        <role-name>instructor</role-name>
+    </security-role>
+
+    <security-constraint>
+        <display-name>AUTH TEST</display-name>
+        <web-resource-collection>
+            <web-resource-name>Common Land</web-resource-name>
+            <url-pattern>/ToDosControllerServlet</url-pattern>
+            <url-pattern>/ToDosDBUtil</url-pattern>
+            <url-pattern>/list-todos.jsp</url-pattern>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>student</role-name>
+        </auth-constraint>
+
+    </security-constraint>
+    <security-role>
+        <description>student</description>
+        <role-name>student</role-name>
+    </security-role>
 </web-app>

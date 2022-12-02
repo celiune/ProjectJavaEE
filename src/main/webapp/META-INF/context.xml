@@ -7,4 +7,9 @@
             maxTotal="20" maxIdle="5" maxWaitMillis="10000"
             username="root" password="root"
             url="jdbc:mysql://localhost:3306/projetjavaee?useSSL=false"/>
+
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+           DataSourceName="jdbc/projetjavaee" localDataSource="true" userTable="users"
+           userRoleTable="roles" userNameCol="username" userCredCol="password"
+           roleNameCol="role"/>
 </Context>
