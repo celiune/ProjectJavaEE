@@ -19,6 +19,8 @@
 <div id="wrapper">
     <div id="header">
         <h2>ESILV Engineer School</h2>
+        <h2 name> Welcome ${username}</h2>
+        <h2 work> ${role}'s page</h2>
     </div>
 </div>
 <div id="container">

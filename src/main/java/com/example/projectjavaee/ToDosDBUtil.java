@@ -140,4 +140,26 @@ public class ToDosDBUtil {
         }
     }
 
+    public String getRole(String name) throws Exception{
+        String role="";
+
+        Connection myConn = null;
+        Statement myStmt = null;
+        ResultSet myRs = null;
+
+        try{
+            myConn = dataSource.getConnection();
+            myStmt = myConn.createStatement();
+            String sql = "SELECT role FROM roles where username='"+name+"';";
+            myRs = myStmt.executeQuery(sql);
+            while (myRs.next()){
+                role = myRs.getString("role");
+            }
+            return role;
+        }
+        finally {
+            close(myConn,myStmt,myRs);
+        }
+    }
+
 }

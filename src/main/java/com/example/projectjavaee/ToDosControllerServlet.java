@@ -6,12 +6,13 @@ import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
+
+import static java.lang.System.out;
 
 @WebServlet(name = "ToDosControllerServlet", value = "/ToDosControllerServlet")
 public class ToDosControllerServlet extends HttpServlet {
@@ -52,10 +53,32 @@ public class ToDosControllerServlet extends HttpServlet {
     }
 
     private void listToDoss(HttpServletRequest request, HttpServletResponse response) throws  Exception{
+        Principal principal = request.getUserPrincipal();
+        request.setAttribute("username", principal.getName());
+        String role = ToDosDBUtil.getRole(principal.getName());
         List<ToDos> ToDoss = ToDosDBUtil.getToDoss();
         request.setAttribute("ToDos_LIST", ToDoss);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/list-todos-instructor.jsp");
-        dispatcher.forward(request,response);
+        out.println(role);
+        //Cookies
+        Cookie cookieName = new Cookie("username", principal.getName());
+        cookieName.setMaxAge(60*60*24) ; // in seconds, here for 24 hours
+        response.addCookie(cookieName) ;
+        Cookie cookieWork = new Cookie("role", role);
+        cookieName.setMaxAge(60*60*24) ; // in seconds, here for 24 hours
+        response.addCookie(cookieWork) ;
+        //Session
+        HttpSession session = request.getSession();
+        session.setAttribute("username", principal.getName());
+        session.setAttribute("role", role);
+        RequestDispatcher dispatcher;
+        if(role.equals("instructor")) {
+            dispatcher = request.getRequestDispatcher("/list-todos-instructor.jsp");
+        }
+        else{
+            dispatcher = request.getRequestDispatcher("/list-todos.jsp");
+        }
+        dispatcher.forward(request, response);
+
     }
 
     @Override
