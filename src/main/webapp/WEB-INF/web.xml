@@ -22,11 +22,9 @@
             <url-pattern>/EditToDosServlet</url-pattern>
             <url-pattern>/AddToDosControllerServlet</url-pattern>
             <url-pattern>/DeleteTodosServlet</url-pattern>
-            <url-pattern>/list-todos-instructor.jsp</url-pattern>
-            <url-pattern>/add-todos.jsp</url-pattern>
             <url-pattern>/ToDosControllerServlet</url-pattern>
             <url-pattern>/ToDosDBUtil</url-pattern>
-            <url-pattern>/list-todos-instructor.jsp</url-pattern>
+            <url-pattern>/LogoutControllerServlet</url-pattern>
         </web-resource-collection>
 
         <auth-constraint>
@@ -45,7 +43,7 @@
             <web-resource-name>Common Land</web-resource-name>
             <url-pattern>/ToDosControllerServlet</url-pattern>
             <url-pattern>/ToDosDBUtil</url-pattern>
-            <url-pattern>/list-todos.jsp</url-pattern>
+            <url-pattern>/LogoutControllerServlet</url-pattern>
         </web-resource-collection>
 
         <auth-constraint>

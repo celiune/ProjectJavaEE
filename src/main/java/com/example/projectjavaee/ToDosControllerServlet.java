@@ -63,12 +63,12 @@ public class ToDosControllerServlet extends HttpServlet {
         Cookie [] cookies = request.getCookies();
         if(cookies!= null){
             for(Cookie cookie:cookies){
-                if(cookie.getName().equals("username"))
-                    request.setAttribute("username", cookie.getValue()) ;
+                if(cookie.getName().equals("name"))
+                    request.setAttribute("name", cookie.getValue()) ;
             }
         }
         else {
-            Cookie cookieName = new Cookie("username", principal.getName());
+            Cookie cookieName = new Cookie("name", principal.getName());
             cookieName.setMaxAge(60*60*24) ; // in seconds, here for 24 hours
             response.addCookie(cookieName) ;
             /*Cookie cookieWork = new Cookie("role", role);

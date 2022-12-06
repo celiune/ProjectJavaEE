@@ -6,19 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="css/login.css" media="screen" type="text/css" />
+
 <html>
 <META HTTP-EQUIV = "Pragma" CONTENT="no-cache">
 <title>Logout Page </title>
 <body>
-<h2>Sample Form Logout</h2>
+<div id="container">
+
 <FORM METHOD=POST ACTION="LogoutControllerServlet" NAME="logout">
+  <h2>Sample Form Logout</h2>
   <p>
-    <BR>
-    <BR>
-    <font size="2"><strong> Click this button to log out: </strong></font>
+    <strong> Click this button to log out: </strong>
     <input type="submit" name="logout" value="Logout">
   </p>
 </form>
+</div>
 </body>
 </html>

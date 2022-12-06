@@ -6,22 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link type="text/css" rel="stylesheet" href="css/add-student-style.css">
 <html>
 <head>
     <title>Add a new ToDo</title>
 </head>
 <body>
-<h1>Add a new ToDo</h1>
-<form name="myForm" action="AddToDosControllerServlet" method="post">
-    <table>
-        <tbody>
-        <tr>
-            <td>Description: </td>
-            <td><input type="text" name="description" value="" size="50"></td>
-        </tr>
+<div id="container">
 
-        </tbody>
-    </table>
+<form name="myForm" action="AddToDosControllerServlet" method="post">
+    <h1>Add a new ToDo</h1>
+    <div class="row">
+        <p>Description: </p>
+        <textarea type="text" name="description" value="" size="50"
+                  rows="5" cols="30"
+                  minlength="10" maxlength="30">
+        </textArea>
+    </div>
+
 
     <input type="reset" value="Cancel" name="cancel">
     <input type="submit" value="Save" name="save">
@@ -29,5 +31,6 @@
 </form>
 
 <a href="ToDosControllerServlet">Back to list</a>
+    </div>
 </body>
 </html>
