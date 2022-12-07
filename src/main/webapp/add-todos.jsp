@@ -19,8 +19,7 @@
     <div class="row">
         <p>Description: </p>
         <textarea type="text" name="description" value="" size="50"
-                  rows="5" cols="30"
-                  minlength="10" maxlength="30">
+                  rows="5" cols="30">
         </textArea>
     </div>
 
@@ -31,6 +30,6 @@
 </form>
 
 <a href="ToDosControllerServlet">Back to list</a>
-    </div>
+</div>
 </body>
 </html>
